@@ -29,11 +29,15 @@ const months = {
 }
 
 const tableContent = document.querySelector('.container .table .table-content');
-
+const tableFooter = document.querySelector('.container .table .table-footer');
 
 
 const addRows = () => {
     const sortedAccount = sort_by_key(account, 'month');
+
+    let totalIncome = 0;
+    let totalExpense = 0;
+    let totalBalance = 0;
     
     sortedAccount.forEach(item => {
         let income = '-';
@@ -42,11 +46,13 @@ const addRows = () => {
         if (item['income'] > 0 ){
             income = item['income'] + ' Eur';
             balance += item['income'];
+            totalIncome += item['income'];
         }
 
         if (item['expense'] > 0 ){
             expense = item['expense'] + ' Eur';
             balance -= item['expense'];
+            totalExpense -= item['expense'];
         }
 
         
@@ -60,12 +66,23 @@ const addRows = () => {
         </div>`;
     
         tableContent.insertAdjacentHTML('beforeend', HTML);
+
+        totalBalance += balance;
+
     });
 
+    const HTML = `
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell">${totalIncome} Eur</div>
+        <div class="cell">${totalExpense} Eur</div>
+        <div class="cell">${totalBalance} Eur</div>`
+        ;
 
+    tableFooter.insertAdjacentHTML('beforeend', HTML);
 
-    console.log
 }
+
 
 function sort_by_key(array, key)
 {

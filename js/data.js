@@ -31,6 +31,12 @@ const months = {
 const tableContent = document.querySelector('.container .table .table-content');
 const tableFooter = document.querySelector('.container .table .table-footer');
 
+const minIncome = document.querySelector('#minIncome');
+const maxIncome = document.querySelector('#maxIncome');
+const minExp = document.querySelector('#minExp');
+const maxExp = document.querySelector('#maxExp');
+
+
 
 const addRows = () => {
     const sortedAccount = sort_by_key(account, 'month');
@@ -83,6 +89,12 @@ const addRows = () => {
 
 }
 
+const addStats = () => {
+    minIncome.textContent = 'Balandis';
+    maxIncome.textContent = 'Rugsėjis';
+    minExp.textContent = 'Lapkritis';
+    maxExp.textContent = 'Rugsėjis';
+}
 
 function sort_by_key(array, key)
 {
@@ -95,3 +107,4 @@ function sort_by_key(array, key)
 
 
 addRows();
+addStats();

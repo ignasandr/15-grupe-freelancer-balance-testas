@@ -27,3 +27,54 @@ const months = {
     11: 'Lapkritis',
     12: 'Gruodis'
 }
+
+const tableContent = document.querySelector('.container .table .table-content');
+
+
+
+const addRows = () => {
+    const sortedAccount = sort_by_key(account, 'month');
+    
+    sortedAccount.forEach(item => {
+        let income = '-';
+        let expense = '-';
+        let balance = 0;
+        if (item['income'] > 0 ){
+            income = item['income'] + ' Eur';
+            balance += item['income'];
+        }
+
+        if (item['expense'] > 0 ){
+            expense = item['expense'] + ' Eur';
+            balance -= item['expense'];
+        }
+
+        
+        const HTML = `
+        <div class="table-row">
+            <div class="cell">${item['month']}</div>
+            <div class="cell">${months[item['month']]}</div>
+            <div class="cell">${income}</div>
+            <div class="cell">${expense}</div>
+            <div class="cell">${balance} Eur</div>
+        </div>`;
+    
+        tableContent.insertAdjacentHTML('beforeend', HTML);
+    });
+
+
+
+    console.log
+}
+
+function sort_by_key(array, key)
+{
+ return array.sort(function(a, b)
+ {
+  var x = a[key]; var y = b[key];
+  return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+ });
+}
+
+
+addRows();
